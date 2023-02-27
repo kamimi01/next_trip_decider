@@ -11,11 +11,14 @@ class RecordScreen extends StatelessWidget {
             child: ListView(
               children: [
                 for (var prefecture in ["北海道", "青森県", "北海道", "青森県", "北海道", "青森県", "北海道", "青森県"])
-                  Row(
-                    children: [
-                      _checkButton(),
-                      Text(prefecture)
-                    ],
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      children: [
+                        _checkButton(),
+                        Text(prefecture, style: TextStyle(fontSize: 25),)
+                      ],
+                    ),
                   )
               ],
             )
@@ -25,14 +28,32 @@ class RecordScreen extends StatelessWidget {
   }
 }
 
-class _checkButton extends StatelessWidget {
+class _checkButton extends StatefulWidget {
+  @override
+  State<_checkButton> createState() => _checkButtonState();
+}
+
+class _checkButtonState extends State<_checkButton> {
+  bool isTapped = false;
+
   @override
   Widget build(BuildContext context) {
     return IconButton(
-        icon: const Icon(Icons.check_circle_outline),
+        icon: isTapped ? const Icon(Icons.check_circle) : const Icon(Icons.check_circle_outline),
+        color: isTapped ? Colors.orange : Colors.grey,
         onPressed: () {
-          // ボタンが押された際の動作を記述する
+          setState(() {
+            isTapped = !isTapped;
+            if (isTapped) {
+              // TODO: DBに保存する
+            } else {
+              // TODO: DBから削除する
+            }
+          });
+          print("押された！");
         },
+        iconSize: 40,
     );
   }
 }
+
