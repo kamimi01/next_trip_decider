@@ -1,28 +1,65 @@
 import 'package:flutter/material.dart';
+import 'package:next_trip_decider/Prefecture.dart';
 
-class RecordScreen extends StatelessWidget {
+class RecordScreen extends StatefulWidget {
   const RecordScreen({Key? key}) : super(key: key);
+
+  @override
+  State<RecordScreen> createState() => _RecordScreenState();
+}
+
+class _RecordScreenState extends State<RecordScreen> {
+  List<Prefecture> prefectures = [];
+
+  @override
+  void initState() {
+    super.initState();
+
+    for (var prefecture in Prefecture.values) {
+      prefectures.add(prefecture);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
+        ProgressCircle(),
         Expanded(
             child: ListView(
               children: [
-                for (var prefecture in ["北海道", "青森県", "北海道", "青森県", "北海道", "青森県", "北海道", "青森県"])
+                for (var prefecture in prefectures)
                   Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
                       children: [
                         _checkButton(),
-                        Text(prefecture, style: TextStyle(fontSize: 25),)
+                        Text(prefecture.displayName, style: TextStyle(fontSize: 25),)
                       ],
                     ),
                   )
               ],
             )
         )
+      ],
+    );
+  }
+}
+
+// TODO: プログレスバーの見た目を整える
+class ProgressCircle extends StatelessWidget {
+  const ProgressCircle({
+    Key? key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Stack(
+      children: const [
+        CircularProgressIndicator(
+          value: 0.8,
+        ),
+        Text("テスト"),
       ],
     );
   }

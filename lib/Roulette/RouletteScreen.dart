@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../Prefecture.dart';
+
 class RouletteScreen extends StatelessWidget {
   const RouletteScreen({Key? key}) : super(key: key);
 
@@ -16,12 +18,21 @@ class RouletteScreen extends StatelessWidget {
   }
 }
 
-class _StartRouletteButton extends StatelessWidget {
+class _StartRouletteButton extends StatefulWidget {
+  @override
+  State<_StartRouletteButton> createState() => _StartRouletteButtonState();
+}
+
+class _StartRouletteButtonState extends State<_StartRouletteButton> {
+  get math => null;
+  Prefecture? selectedPrefecture;
+
   @override
   Widget build(BuildContext context) {
     return MaterialButton(
         onPressed: () {
           print("押された！");
+          startRoulette();
         },
         child: Text("旅をする", style: TextStyle(fontSize: 30)),
         padding: EdgeInsets.all(80),
@@ -29,5 +40,10 @@ class _StartRouletteButton extends StatelessWidget {
         textColor: Colors.white,
         shape: CircleBorder()
     );
+  }
+
+  void startRoulette() {
+    final randomNumber = math.Random(47);
+    selectedPrefecture = Prefecture.values[randomNumber];
   }
 }
