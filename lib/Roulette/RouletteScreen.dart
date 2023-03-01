@@ -23,7 +23,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
   Widget build(BuildContext context) {
     String displayText() {
       if (selectedPrefecture != null) {
-        return selectedPrefecture!.displayName;
+        return selectedPrefecture!.displayName + "\nに行こう！";
       }
       return "ボタンを押してね👇";
     };
@@ -31,7 +31,7 @@ class _RouletteScreenState extends State<RouletteScreen> {
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Text(displayText(), style: TextStyle(fontSize: 25)),
+        Text(displayText(), textAlign: TextAlign.center, style: TextStyle(fontSize: 25)),
         SizedBox(height: 30),
         _StartRouletteButton(
           buttonHandler: _setPrefecture,
