@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'dart:math' as math;
 
 import '../Prefecture.dart';
 
@@ -24,7 +25,6 @@ class _StartRouletteButton extends StatefulWidget {
 }
 
 class _StartRouletteButtonState extends State<_StartRouletteButton> {
-  get math => null;
   Prefecture? selectedPrefecture;
 
   @override
@@ -43,7 +43,8 @@ class _StartRouletteButtonState extends State<_StartRouletteButton> {
   }
 
   void startRoulette() {
-    final randomNumber = math.Random(47);
+    final randomNumber = math.Random().nextInt(47);
+    print(randomNumber);
     selectedPrefecture = Prefecture.values[randomNumber];
   }
 }
