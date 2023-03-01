@@ -26,7 +26,7 @@ class _RecordScreenState extends State<RecordScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        ProgressCircle(),
+        const ProgressCircle(),
         Expanded(
             child: ListView(
               children: [
@@ -48,12 +48,16 @@ class _RecordScreenState extends State<RecordScreen> {
   }
 }
 
-// TODO: プログレスバーの見た目を整える
-class ProgressCircle extends StatelessWidget {
+class ProgressCircle extends StatefulWidget {
   const ProgressCircle({
     Key? key,
   }) : super(key: key);
 
+  @override
+  State<ProgressCircle> createState() => _ProgressCircleState();
+}
+
+class _ProgressCircleState extends State<ProgressCircle> {
   @override
   Widget build(BuildContext context) {
     return Stack(
