@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:next_trip_decider/Prefecture.dart';
 
@@ -55,11 +57,28 @@ class ProgressCircle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Stack(
-      children: const [
-        CircularProgressIndicator(
-          value: 0.8,
+      alignment: AlignmentDirectional.center,
+      children: [
+        const SizedBox(
+          height: 130,
+          width: 130,
+          child: CircularProgressIndicator(
+            value: 0.8,
+            strokeWidth: 10.0,
+            backgroundColor: Colors.grey,
+          ),
         ),
-        Text("テスト"),
+        SizedBox(
+          height: 130,
+          width: 130,
+          child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: const [
+                Text("23", style: TextStyle(fontSize: 35, color: Colors.orange, fontWeight: FontWeight.bold),),
+                Text(" / 47", style: TextStyle(fontSize: 20, color: Colors.grey),),
+              ],
+            ),
+        )
       ],
     );
   }
