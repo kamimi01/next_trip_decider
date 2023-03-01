@@ -3,29 +3,47 @@ import 'dart:math' as math;
 
 import '../Prefecture.dart';
 
-class RouletteScreen extends StatelessWidget {
+class RouletteScreen extends StatefulWidget {
   const RouletteScreen({Key? key}) : super(key: key);
 
   @override
+  State<RouletteScreen> createState() => _RouletteScreenState();
+}
+
+class _RouletteScreenState extends State<RouletteScreen> {
+  Prefecture? selectedPrefecture;
+
+  void _setPrefecture(Prefecture prefecture) {
+    setState(() {
+      selectedPrefecture = prefecture;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    String displayText() {
+      if (selectedPrefecture != null) {
+        return selectedPrefecture!.displayName;
+      }
+      return "ボタンを押してね👇";
+    };
+
     return Column(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        const Text("ボタンを押してね👇", style: TextStyle(fontSize: 25)),
+        Text(displayText(), style: TextStyle(fontSize: 25)),
         SizedBox(height: 30),
-        _StartRouletteButton()
+        _StartRouletteButton(
+          buttonHandler: _setPrefecture,
+        )
       ]
     );
   }
 }
 
-class _StartRouletteButton extends StatefulWidget {
-  @override
-  State<_StartRouletteButton> createState() => _StartRouletteButtonState();
-}
-
-class _StartRouletteButtonState extends State<_StartRouletteButton> {
-  Prefecture? selectedPrefecture;
+class _StartRouletteButton extends StatelessWidget {
+  final Function buttonHandler;
+  const _StartRouletteButton({Key? key, required this.buttonHandler}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -45,6 +63,6 @@ class _StartRouletteButtonState extends State<_StartRouletteButton> {
   void startRoulette() {
     final randomNumber = math.Random().nextInt(47);
     print(randomNumber);
-    selectedPrefecture = Prefecture.values[randomNumber];
+    buttonHandler(Prefecture.values[randomNumber]);
   }
 }
