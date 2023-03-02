@@ -26,7 +26,10 @@ class _RecordScreenState extends State<RecordScreen> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const ProgressCircle(),
+        const Padding(
+          padding: EdgeInsets.all(20.0),
+          child: ProgressCircle(),
+        ),
         Expanded(
             child: ListView(
               children: [
