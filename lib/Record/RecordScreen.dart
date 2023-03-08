@@ -1,7 +1,6 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:next_trip_decider/Prefecture.dart';
+import '../PrefectureModel.dart';
 
 class RecordScreen extends StatefulWidget {
   const RecordScreen({Key? key}) : super(key: key);
@@ -12,6 +11,7 @@ class RecordScreen extends StatefulWidget {
 
 class _RecordScreenState extends State<RecordScreen> {
   List<Prefecture> prefectures = [];
+  List<PrefectureModel> selectedPrefectures = [];
 
   @override
   void initState() {
@@ -38,8 +38,8 @@ class _RecordScreenState extends State<RecordScreen> {
                     padding: const EdgeInsets.all(5.0),
                     child: Row(
                       children: [
-                        _checkButton(),
-                        Text(prefecture.displayName, style: TextStyle(fontSize: 25),)
+                        const CheckButton(),
+                        Text(prefecture.displayName, style: const TextStyle(fontSize: 25),)
                       ],
                     ),
                   )
@@ -91,12 +91,14 @@ class _ProgressCircleState extends State<ProgressCircle> {
   }
 }
 
-class _checkButton extends StatefulWidget {
+class CheckButton extends StatefulWidget {
+  const CheckButton({Key? key}) : super(key: key);
+
   @override
-  State<_checkButton> createState() => _checkButtonState();
+  State<CheckButton> createState() => _CheckButtonState();
 }
 
-class _checkButtonState extends State<_checkButton> {
+class _CheckButtonState extends State<CheckButton> {
   bool isTapped = false;
 
   @override
