@@ -4,12 +4,12 @@ import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 
 class DatabaseHelper {
-  static final _databaseName = "NextTripDecider.db";
-  static final _databaseVersion = 1;
+  static const _databaseName = "NextTripDecider.db";
+  static const _databaseVersion = 1;
 
-  static final table = "prefecture";
+  static const table = "prefecture";
 
-  static final columnName = "name";
+  static const columnName = "name";
 
   // シングルトンにする
   DatabaseHelper._privateConstructor();
