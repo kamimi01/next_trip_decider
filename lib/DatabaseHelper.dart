@@ -39,7 +39,7 @@ class DatabaseHelper {
   }
 
   // 追加する
-  void _insert(PrefectureModel prefecture) async {
+  void insert(PrefectureModel prefecture) async {
     if (_database == null) { return; }
     await _database!.insert(
         table,
@@ -49,16 +49,29 @@ class DatabaseHelper {
   }
 
   // 削除する
+  Future<void> delete(String name) async {
+    if (_database == null) {
+      return;
+    }
+
+    await _database!.delete(
+      table,
+      where: "$columnName = ?",
+      whereArgs: [name]
+    );
+  }
 
   // 取得する
-  // Future<List<PrefectureModel>> prefectures() async {
-  //   if (_database == null) { return; }
-  //   final List<Map<String, dynamic>> maps = await _database!.query(table);
-  //
-  //   return List.generate(maps.length, (index) => {
-  //     return PrefectureModel(
-  //       name: maps[index][columnName],
-  //     );
-  //   });
-  // }
+  Future<List<PrefectureModel>> prefectures() async {
+    if (_database == null) {
+      return [];
+    }
+    final List<Map<String, dynamic>> maps = await _database!.query(table);
+
+    return List.generate(maps.length, (index) {
+      return PrefectureModel(
+        name: maps[index][columnName],
+      );
+    });
+  }
 }
